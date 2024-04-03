@@ -1,0 +1,9 @@
+These steps should be executed sequentialy to ensure no screw ups:
+
+1. IMPORTANT - Change your git remote repo URL with the "git remote set-url" command.
+2. Through the entire project, Search and Replace "BasicProjectApexLookAndFeel" with your project name.
+3. Rename the file BasicProjectApexLookAndFeel.sln to YourProjectName.sln
+4. Rename the file BasicProjectApexLookAndFeel.csproj to YourProjectName.csproj
+5. Rename the file BasicProjectApexLookAndFeel.csproj.user to YourProjectName.csproj.user
+6. Rebuild the project solution.
+7. Commit your changes and push to your newly defined remote repo.

@@ -1,0 +1,42 @@
+﻿@model ANBU.Models.Category
+
+@{
+    ViewData["Title"] = "Update Category";
+}
+
+<h2>Update</h2>
+
+<h4>Category</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CategoryId" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryCode" class="control-label"></label>
+                <input asp-for="CategoryCode" class="form-control" required />
+                <span asp-validation-for="CategoryCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input class="form-check-input" asp-for="IsActive" type="checkbox" value="">
+                <label asp-for="IsActive" class="control-label"></label>
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

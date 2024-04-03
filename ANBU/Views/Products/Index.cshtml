@@ -1,0 +1,150 @@
+﻿@model ReflectionIT.Mvc.Paging.PagingList<ANBU.Models.ViewModels.ProductsVM>
+@using ReflectionIT.Mvc.Paging
+@using Microsoft.AspNetCore.Http.Extensions;
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+@{
+    ViewBag.Title = "Products";
+    var returnUrlPath = Context.Request.GetEncodedPathAndQuery();
+    ViewBag.returnPath = returnUrlPath;
+}
+
+<style>
+    .square {
+        width: 30px; 
+        height: 30px; 
+        overflow: hidden;
+        border: 1px solid #ccc;
+        position: relative;
+    }
+
+        .square img {
+            width: 90%; 
+            height: 90%; 
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+</style>
+
+<section class="mb-4">
+    <br />
+    <br />
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 my-auto">
+                    <a class="btn btn-outline-info" asp-controller="Products" asp-action="ExportToCSV" data-bs-toggle="tooltip" data-bs-placement="top" title="Export To CSV"><i class="fa-solid fa-download"></i></a>
+                </div>
+                <div class="col-md-6">
+                    @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+                    {
+                        <div class="row">
+                            <div class="col-md-5">
+                                @if (!String.IsNullOrEmpty(ViewBag.filter))
+                                {
+                                    var appliedFilter = "";
+
+                                    if (!String.IsNullOrEmpty(ViewBag.filter))
+                                    {
+                                        appliedFilter += "<b>Filter : </b>  " + ViewBag.filter;
+                                    }
+
+                                    <p>Applied filtering : @Html.Raw(appliedFilter) <a class="text-danger" asp-controller="Products" asp-action="Index" asp-route-filter="@ViewBag.filter"><i class="fa fa-times"></i></a></p>
+                                }
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-2" style="margin-bottom:15px;">
+                                    <input type="hidden" name="returnUrl" id="returnUrl" value="@ViewBag.returnUrl" />
+                                    <input name="filter" class="form-control form-control-sm mr-3 w-75" placeholder="Filter" type="text" value="" aria-describedby="button-addon">
+                                    <div class="input-group-append">
+                                        <button type="submit" style="border:none; background-color:unset;"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th class="text-center">
+                                    @Html.SortableHeaderFor(model => model.Name)
+                                </th>
+                                <th class="text-center">
+                                    @Html.SortableHeaderFor(model => model.Price)
+                                </th>
+                                <th class="text-center">
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </th>
+                                <th class="text-center">
+                                    @Html.DisplayNameFor(model => model.Code)
+                                </th>
+                                <th class="text-center">
+                                    @Html.SortableHeaderFor(model => model.CategoryName)
+                                </th>
+                                <th class="text-center">
+                                    @Html.DisplayNameFor(model => model.Image)
+                                </th>
+                                <th class="text-center">
+                                    <a class="btn btn-outline-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Product" onclick="showInPopup('@Url.Action("Create","Products", new { locationId = ViewBag.locationId },Context.Request.Scheme)','Add Product' )"><i class="fas fa-plus"></i></a>
+                                    <a class="btn btn-outline-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Upload Products" onclick="showInPopup('@Url.Action("BulkCreate","Products", null,Context.Request.Scheme)','Upload Products' )">Upload Products</a>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.Price)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.Code)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.CategoryName)
+                                    </td>
+                                    <td class="text-center square">
+                                        @if (item.DbImage == null)
+                                        {
+                                               @Html.DisplayFor(modelItem => item.ImageName)
+                                        }
+                                        else
+                                        {
+                                                 <img src="data:image;base64,@Convert.ToBase64String(item.DbImage)" alt="Item.Name" />
+                                        }
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.DateCreated.ToString("MM/dd/yyyy"))
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="text-warning" style="padding:10px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Product" onclick="showInPopup('@Url.Action("Edit","Products",new { name = item.Name, userId = item.UserId, returnUrl= returnUrlPath},Context.Request.Scheme)','@Html.Raw("Edit product : " + item.Name)' )"><i class="fas fa-edit"></i></a>
+                                        <a data-bs-toggle="tooltip" style="padding:10px;" data-bs-placement="top" title="Remove Product" class="text-danger mr-2" onclick="showInPopup('@Url.Action("Delete","Products",new {  name = item.Name, userId = item.UserId},Context.Request.Scheme)','@Html.Raw("Remove product " + item.Name)' )"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                    <nav aria-label="Account navigation">
+                        <vc:pager paging-list="@Model" />
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

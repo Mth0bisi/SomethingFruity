@@ -1,0 +1,67 @@
+﻿@model ANBU.Models.ViewModels.ProductsVM
+
+@{
+    ViewData["Title"] = "Update Product";
+    Layout = null;
+}
+
+<h2>Update Product</h2>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                   @using (Html.BeginForm("Edit", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="UserId" />
+                    <input type="hidden" asp-for="ImageName" />
+                    <input type="hidden" asp-for="DbImage" />
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" required />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Price" class="control-label"></label>
+                        <input name="Price" value="@Model.Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Code" class="control-label"></label>
+                        <input asp-for="Code" class="form-control" readonly/>
+                        <span asp-validation-for="Code" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Category</label>
+                        <select asp-for="CategoryId" class="form-control selectpicker" data-live-search="true" asp-items="ViewBag.Categories" required>
+                            <option value="">Select Category</option>
+                        </select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style="padding-top:10px;">
+                        <label asp-for="Image" class="control-label"></label>
+                        <input asp-for="Image" type="file" class="form-control-file" id="upload" accept="image/*">
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-success" />
+                    </div>
+                    }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

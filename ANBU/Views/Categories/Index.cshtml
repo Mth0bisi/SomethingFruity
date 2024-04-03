@@ -1,0 +1,106 @@
+﻿@model ReflectionIT.Mvc.Paging.PagingList<ANBU.Models.Category>
+@using ReflectionIT.Mvc.Paging
+@using Microsoft.AspNetCore.Http.Extensions;
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+@{
+    ViewBag.Title = "Categories";
+    var returnUrlPath = Context.Request.GetEncodedPathAndQuery();
+    ViewBag.returnPath = returnUrlPath;
+}
+
+
+
+<section class="mb-4">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 my-auto">
+               
+                </div>
+                <div class="col-md-6">
+                    @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+                    {
+                        <div class="row">
+                            <div class="col-md-5">
+                                @if (!String.IsNullOrEmpty(ViewBag.filter))
+                                {
+                                    var appliedFilter = "";
+
+                                    if (!String.IsNullOrEmpty(ViewBag.filter))
+                                    {
+                                        appliedFilter += "<b>Filter : </b>  " + ViewBag.filter;
+                                    }
+
+                                    <p>Applied filtering : @Html.Raw(appliedFilter) <a class="text-danger" asp-controller="Products" asp-action="Index" asp-route-filter="@ViewBag.filter"><i class="fa fa-times"></i></a></p>
+                                }
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-2" style="margin-bottom:15px;">
+                                    <input type="hidden" name="returnUrl" id="returnUrl" value="@ViewBag.returnUrl" />
+                                    <input name="filter" class="form-control form-control-sm mr-3 w-75" placeholder="Filter" type="text" value="" aria-describedby="button-addon">
+                                    <div class="input-group-append">
+                                        <button type="submit" style="border:none; background-color:unset;"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                @if (Model.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">
+                                        @Html.SortableHeaderFor(model => model.Name)
+                                    </th>
+                                    <th class="text-center">
+                                        @Html.SortableHeaderFor(model => model.CategoryCode)
+                                    </th>
+                                    <th class="text-center">
+                                        @Html.DisplayNameFor(model => model.IsActive)
+                                    </th>
+                                    <th class="text-center">
+                                        <a class="btn btn-outline-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Category" onclick="showInPopup('@Url.Action("Create","Categories", new { locationId = ViewBag.locationId },Context.Request.Scheme)','Add Category' )"><i class="fas fa-plus"></i></a>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="text-center">
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td class="text-center">
+                                            @Html.DisplayFor(modelItem => item.CategoryCode)
+                                        </td>
+                                        <td class="text-center">
+                                            @Html.DisplayFor(modelItem => item.IsActive)
+                                        </td>
+                                        <td class="text-center">
+                                            <a class="text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Category" onclick="showInPopup('@Url.Action("Edit","Categories",new { name = item.Name, returnUrl= returnUrlPath},Context.Request.Scheme)','@Html.Raw("Edit Category : " + item.Name)' )"><i class="fas fa-edit"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                        <nav aria-label="Account navigation">
+                            <vc:pager paging-list="@Model" />
+                        </nav>
+                    </div>
+                }
+                else
+                {
+                    <p>@ViewBag.Message</p>
+                }
+            </div>
+        </div>
+    </div>
+</section>

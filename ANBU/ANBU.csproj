@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>disable</Nullable>
+		<CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+		<UserSecretsId>1904de5f-d449-46ec-9b91-346973b894cc</UserSecretsId>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ClosedXML" Version="0.102.1" />
+		<PackageReference Include="CsvHelper" Version="30.0.1" />
+		<PackageReference Include="HangFire" Version="1.8.6" />
+		<PackageReference Include="Hangfire.PostgreSql" Version="1.20.4" />
+		<PackageReference Include="MailKit" Version="4.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.24" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.24" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.24" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.24" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.24">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.24" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.24" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.24">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+		<PackageReference Include="Novell.Directory.Ldap.NETStandard" Version="3.6.0" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.22" />
+		<PackageReference Include="NWebsec.AspNetCore.Middleware" Version="3.0.0" />
+		<PackageReference Include="ReflectionIT.Mvc.Paging" Version="6.0.1" />
+		<PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+		<PackageReference Include="System.ServiceModel.Duplex" Version="6.0.0" />
+		<PackageReference Include="System.ServiceModel.Http" Version="6.1.0" />
+		<PackageReference Include="System.ServiceModel.NetTcp" Version="6.1.0" />
+		<PackageReference Include="System.ServiceModel.Security" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="6.0.24" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.12" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="logs\" />
+	</ItemGroup>
+</Project>

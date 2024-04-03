@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@if (User.Identity.IsAuthenticated)
+{
+@*    <ul class="navbar-nav ms-auto d-flex flex-row">
+        <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#"
+                   id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user mr-2"></i><span class="clearfix d-none d-sm-inline-block" style="padding-left:3px;"> @User.Identity.Name</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                    <li>
+                    <form id="logout-form" method="post" asp-controller="UserAccounts" asp-action="LogOut" style="width:inherit !important; ">
+                            <a href="javascript:$('#logout-form').submit();" class="dropdown-item"><i class="fas fa-power-off mr-2 text-danger"></i><span> Logout</span></a>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        </ul>*@
+    <div class="navbar-collapse collapse">
+        <ul class="navbar-nav navbar-align">
+            <li class="nav-item dropdown">
+                <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                        <i class="align-middle" data-feather="settings"></i>
+                    </a>
+                <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                    <span class="text-dark">@User.Identity.Name</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <form id="logout-form" method="post" asp-controller="UserAccounts" asp-action="LogOut" style="width:inherit !important; ">
+                        <a href="javascript:$('#logout-form').submit();" class="dropdown-item"><i class="fas fa-power-off mr-2 text-danger"></i><span> Logout</span></a>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
+}
+else
+{
+    <div>
+        <ul class="navbar-nav navbar-align">
+            <li class="nav-item dropdown">
+                <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                        <i class="align-middle" data-feather="settings"></i>
+                    </a>
+                <a class="nav-link dropdown-toggle d-none d-sm-inline-block" asp-controller="UserAccounts" asp-action="Login" data-bs-toggle="dropdown">
+                    <span class="text-dark"> <i class="far fa-user"></i> Login</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+@*    <ul class="navbar-nav ms-auto d-flex flex-row">
+        <li class="nav-item">
+            <a class="nav-link me-3 me-lg-0" asp-controller="UserAccounts" asp-action="Login">
+                <i class="far fa-user"></i> Login
+            </a>
+        </li>
+    </ul>*@
+}

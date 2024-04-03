@@ -1,0 +1,32 @@
+﻿@model ANBU.Models.ViewModels.ProductsUploadVM
+@{
+    ViewData["Title"] = "Bulk Products Upload";
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <form asp-controller="Products" asp-action="BulkCreate" method="post"
+                          enctype="multipart/form-data" id="uploadForm">
+                        <div class="form-group">
+                            <label asp-for="ProductsFile" class="control-label"></label>
+                            <input asp-for="ProductsFile" type="file" class="form-control" id="upload" name="upload" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                            <span asp-validation-for="ProductsFile" class="text-danger"></span>
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <div class="float-left ml-3">
+                                <button class="btn btn-success" id="submitBtn">Submit</button>
+                                <a class="btn btn-warning" asp-controller="Batches"
+                                   asp-action="Index">Back</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
