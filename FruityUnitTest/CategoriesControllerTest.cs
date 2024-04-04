@@ -1,8 +1,8 @@
-using ANBU.Controllers;
-using ANBU.Data.Repository;
-using ANBU.Data.Repository.Categories;
-using ANBU.Models;
-using ANBU.Services;
+using SomethingFruity.Controllers;
+using SomethingFruity.Data.Repository;
+using SomethingFruity.Data.Repository.Categories;
+using SomethingFruity.Models;
+using SomethingFruity.Services;
 using Moq;
 using NuGet.Packaging.Signing;
 

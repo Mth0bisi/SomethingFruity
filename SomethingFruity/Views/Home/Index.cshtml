@@ -1,0 +1,54 @@
+﻿@model ReflectionIT.Mvc.Paging.PagingList<SomethingFruity.Models.ViewModels.DashboardVM>
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+<!--Section: Sales Performance KPIs-->
+<section class="mb-4">
+    <div class="card">
+        <div class="card-header text-center py-3">
+            <h5 class="mb-0 text-center">
+                <strong>Last 5 added products</strong>
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th class="text-center">
+                                Category Name
+                            </th>
+                            <th class="text-center">
+                                Products Count
+                            </th>
+                            <th class="text-center">
+
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.CategoryName)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.ProductsCount)
+                                </td>
+                                <td class="text-center">
+                                    <a class="text-info" asp-controller="Products" asp-action="Index" asp-route-categoryFilter="@item.CategoryName" asp-route-categoryiD="@item.CategoryId"><i class="fa-solid fa-right-long"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <nav aria-label="Account navigation">
+                <vc:pager paging-list="@Model" />
+            </nav>
+        </div>
+    </div>
+</section>
+<!--Section: Sales Performance KPIs-->

@@ -1,6 +1,6 @@
-﻿using ANBU.Data.Repository.Products;
-using ANBU.Models;
-using ANBU.Services;
+﻿using SomethingFruity.Data.Repository.Products;
+using SomethingFruity.Models;
+using SomethingFruity.Services;
 using Moq;
 
 namespace FruityUnitTest

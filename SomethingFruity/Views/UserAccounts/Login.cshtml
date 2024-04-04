@@ -1,0 +1,155 @@
+﻿@model SomethingFruity.Models.ViewModels.LoginViewModel
+@{
+    Layout = null;
+    ViewData["Title"] = "Login"; 
+}
+
+<!DOCTYPE html>
+@*<html lang="en" class="loading">*@
+<html lang="en">
+<!-- BEGIN : Head-->
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>@ViewData["Title"] Something Fruity</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <environment include="Development">
+        <link href="~/fontawesome/css/all.min.css" rel="stylesheet" />
+        <link href="~/css/mdb.min.css" rel="stylesheet" />
+        <link href="~/css/login.css" rel="stylesheet" />
+        <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    </environment>
+    <environment exclude="Development">
+        <link href="~/fontawesome/css/all.min.css" rel="stylesheet" />
+        <link href="~/css/mdb.min.css" rel="stylesheet" />
+        <link href="~/css/login.css" rel="stylesheet" />
+        <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    </environment>
+
+
+</head>
+
+
+<body class="login-page">
+    <!-- Main Navigation -->
+    <header>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000;">
+            <div class="container-fluid">
+                <!-- Navbar brand -->
+                <a class="navbar-brand nav-link" target="_blank" href="#">
+                    <strong>Something Fruity</strong>
+                </a>
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
+                        aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarExample01">
+                </div>
+            </div>
+        </nav>
+        <!-- Navbar -->
+        <!-- Background image -->
+        <div id="intro" class="bg-image shadow-2-strong">
+            <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-5 col-md-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <ul class="nav nav-pills nav-justified">
+                                        <li class="nav-item">
+                                            <a href="#home" class="nav-link active" data-bs-toggle="tab">Login</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#profile" class="nav-link" data-bs-toggle="tab">Register</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="home">
+                                            <form class="bg-white rounded shadow-5-strong p-5" asp-action="Login">
+                                                <input type="hidden" value="@ViewData["ReturnUrl"]" />
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <h3>Welcome Back!</h3>
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                <p style="color:red">@ViewBag.MessageError</p>
+                                                <!-- Email input -->
+                                                <div class="form-floating">
+                                                    <input asp-for="Email" class="form-control" autocomplete="username" required />
+                                                    <label asp-for="Email"></label>
+                                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-floating">
+                                                    <input asp-for="Password" class="form-control" autocomplete="new-password" required />
+                                                    <label asp-for="Password"></label>
+                                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                                </div>
+                                                <!-- Submit button -->
+                                                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                            </form>
+                                        </div>
+                                        <div class="tab-pane fade" id="profile">
+                                            <form class="bg-white rounded shadow-5-strong p-5" asp-action="Register">
+                                                <input type="hidden" value="@ViewData["ReturnUrl"]" />
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <h3>Create Account</h3>
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                <p style="color:red">@ViewBag.MessageError</p>
+                                                <div class="form-floating">
+                                                    <input asp-for="Email" class="form-control" autocomplete="username" required />
+                                                    <label asp-for="Email"></label>
+                                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-floating">
+                                                    <input asp-for="Password" class="form-control" autocomplete="new-password" required />
+                                                    <label asp-for="Password"></label>
+                                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-floating">
+                                                    <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" required />
+                                                    <label asp-for="ConfirmPassword"></label>
+                                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                                </div>
+                                                <!-- Submit button -->
+                                                <button type="submit" class="btn btn-primary btn-block">Register</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Background image -->
+    </header>
+
+    <environment include="Development">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/jquery-3.4.1.min.js"></script>
+        <script src="~/js/popper.min.js"></script>
+        <script src="~/js/mdb.min.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/jquery-3.4.1.min.js"></script>
+        <script src="~/js/popper.min.js"></script>
+        <script src="~/js/mdb.min.js"></script>
+    </environment>
+</body>
+<!-- END : Body-->
+</html>
