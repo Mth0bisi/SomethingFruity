@@ -13,6 +13,7 @@ namespace FruityUnitTest
             //Arrange
             var mockProductsRepository = new Mock<IProductRepository>();
             var productsService = new ProductsService(mockProductsRepository.Object);
+           //UserId can be retrieved from the database under the Users table after user has registered account
             var user = new User { Id = "UserId", Email = "user@gmai.com"};
             var productsList = new List<Product>
             {
